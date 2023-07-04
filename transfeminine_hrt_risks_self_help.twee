@@ -505,7 +505,7 @@ body{
 }
 
 body::after{
-	content: "PROTOTYPE - PROOF OF CONCEPT - DO NOT USE";
+	content: "!! PROTOTYPE - PROOF OF CONCEPT - DO NOT USE !!";
 	position: fixed;
 	top: 0;
 	left: 0;
