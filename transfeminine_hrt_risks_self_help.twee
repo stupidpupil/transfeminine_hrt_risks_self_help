@@ -1,0 +1,537 @@
+:: StoryTitle
+Transfeminine HRT Risks Self-Help
+
+
+:: StoryData
+{
+  "ifid": "063402A2-22FD-4F8E-B85A-F8C50F4AA340",
+  "format": "Harlowe",
+  "format-version": "3.3.5",
+  "start": "Intro",
+  "zoom": 1
+}
+
+
+:: Bicalutamide {"position":"700,525","size":"100,100"}
+# Are you taking bicalutamide?
+{
+[(set: $bicalutamide to "no")]\
+}
+Bicalutamide is generally described as an "anti-androgen". People take it as part of transfeminine hormone therapy to block the effect of androgens like testosterone.
+
+Bicalutamide is also known as:
+	* "''bica''"
+  * "''Casodex''"
+	* "''Calutex''"
+	* "''Calutide''"
+	* "''Procalut''"
+	* "''Binabic''"
+If you are taking any of these then you are taking ''bicalutamide''.
+
+(link: "Yes, I am taking bicalutamide")[
+	(set: $bicalutamide to "yes")
+	(go-to: "Spironolactone")
+]
+
+(link: "No, I am //not// taking bicalutamide")[
+	(set: $bicalutamide to "no")
+	(go-to: "Spironolactone")
+]
+
+
+:: Check answers {"position":"1025,275","size":"100,100"}
+(display: "List of Medication")\
+You said that you're ''not'' taking the following medications:
+(if:$estradiol is "no")[\
+	* Estradiol\
+] \
+(if:$estradiol is "yes" and $estradiol_oral is "no")[\
+	* Oral estradiol\
+] \
+(if:$ethinylestradiol is "no")[\
+	* Ethinylestradiol\
+] \
+(if:$cyproterone_acetate is "no")[\
+	* Cyproterone acetate\
+] \
+(if:$bicalutamide is "no")[\
+	* Bicalutamide\
+] \
+(if:$spironolactone is "no")[\
+	* Spironolactone\
+] \
+\
+(if:$estradiol is "no")[It is //unusual// for someone on transfeminine hormone therapy to //not// be taking estradiol.
+]\
+\
+Is the above correct?
+
+(link: "Yes, the above lists are correct.")[
+	(go-to: "Liver Function")
+]
+
+(link: "No, something is wrong. Ask me again.")[
+	(go-to: "Estradiol")
+]
+
+
+:: Cyproterone acetate {"position":"700,400","size":"100,100"}
+# Are you taking cyproterone acetate?
+{
+[	(set: $cyproterone_acetate to "no")]\
+}
+Cyproterone acetate is generally described as an "anti-androgen". People take it as part of transfeminine hormone therapy to help suppress their body's production of testosterone.
+
+Cyproterone acetate is also known as: 
+	* "''CPA''" or "''Cypro''"
+	* "''Androcur''"
+	* "''Cyprostat''"
+  	* "''Siterone''" 
+It is found in ''Diane'' and ''Diane-35''. 
+
+If you are taking any of these then you are taking ''cyproterone acetate''.
+
+(link: "Yes, I am taking cyproterone acetate")[
+	(set: $cyproterone_acetate to "yes")
+	(go-to: "Bicalutamide")
+]
+
+(link: "No, I am //not// taking cyproterone acetate")[
+	(set: $cyproterone_acetate to "no")
+	(go-to: "Bicalutamide")
+]
+
+
+:: Cyproterone acetate warnings {"position":"1425,275","size":"100,100"}
+(display: "List of Medication")\
+ (set: $needs_prolactin to "no")\
+ (set: $needs_b12 to "no")\
+  \
+(if:$cyproterone_acetate is "no")[\
+(go-to: "Spironolactone warnings")
+ You said that you did ''not'' take cyproterone acetate.
+]\
+(if:$cyproterone_acetate is "yes")[\
+# Cyproterone acetate
+There are some increased risks of rare abnormal growths (tumours) associated with taking cyproterone acetate.
+]\
+\
+(if:$cyproterone_acetate is "yes")[\
+## Cyproterone acetate and prolactinomas
+  (set: $needs_prolactin to "yes")\
+  Taking cyproterone acetate tends to result in higher levels of a hormone called "prolactin". 
+
+  Higher levels of prolactin are associated with the rare development of non-cancerous abnormal growths called "prolactinomas".
+]\
+\
+(if: $needs_prolactin is "yes")[\
+  Based only on the above, you may wish to ensure that your blood tests include **prolactin**. 
+]\
+
+(if:$cyproterone_acetate is "yes")[\
+## Cyproterone acetate and meningiomas
+Cyproterone acetate is also associated with an increased risk of developing abnormal growths in the brain called "meningiomas". The increase in risk depends on both a) how high your dose of cyproterone acetate is, and b) for how long you take cyproterone acetate. 
+
+(link: "Tell me more about cyproterone acetate and the risk of meningiomas.")[\
+If you stop taking cyproterone acetate the risk will reduce, but it will remain higher than if you had never taken it.
+
+Around 1 in 100 people assigned-male-at-birth (AMAB) who //never// take any kind of transfeminine hormone therapy will develop a meningioma during their lifetime.
+
+Taking around 12.5mg-per-day of cyproterone acetate for two decades - and then stopping - might raise this lifetime risk of meningioma to around 3 in 100. It is hard to estimate the exact change in risk.]
+
+Early signs and symptoms of a meningioma can include changes in vision, hearing loss or ringing in the ears (tinnitus), loss of smell, headaches that worsen with time, memory loss, seizures, or weakness in extremities. If you experience any of these, you may wish to seek medical advice as soon as possible.
+]
+
+(if:$cyproterone_acetate is "yes")[\
+## Cyproterone acetate and vitamin B12
+(set:$needs_b12 to "yes")\
+Cyproterone acetate has been associated with occasional vitamin B12 deficiency.]
+
+(if: $needs_b12 is "yes")[\
+  Based only on the above, you may want your blood tests to sometimes include **active vitamin B12**. 
+]\
+
+(link: "Continue")[
+	(go-to: "Spironolactone warnings")
+]
+
+
+:: Early exit {"position":"500,25","size":"100,100"}
+You said that you're ''not'' taking any kind of transfeminine hormone therapy.
+
+This web page is intended only for people taking transfemine hormone therapy.
+
+
+:: Early exit 2 {"position":"600,25","size":"100,100"}
+You said that, having read about the limitations of this web page, that you did not wish to continue using it.
+
+
+:: Estradiol {"position":"675,150","size":"100,100"}
+# Are you taking estradiol?
+\
+[(set: $estradiol to "no")\
+(set: $estradiol_oral to "no") \
+(set: $estradiol_sublingual to "no")\
+(set: $estradiol_injection to "no")\
+(set: $estradiol_transdermal to "no")]\
+\
+Most people on transfeminine hormone therapy are taking estradiol. Estradiol can be taken as pills, as patches, as gel or as injections.
+
+Estradiol is also known as:
+		* "''estrogen''"/ "''oestrogen''"
+   	* "''oestradiol''"
+  	* "''E''" or "''E2''"
+ Some common forms of estradiol include:
+		* ''estradiol hemihydrate'', in e.g. ''Estrofem'' and ''Estradot''
+		* ''estradiol undecylate'' (EU)
+		* ''estradiol valerate'' (EV), in e.g. ''Progynova''
+    * ''estradiol cypionate'' (EC)
+   	* ''estradiol ethanate'' (EEn)
+ If you are taking any of these then you are taking ''estradiol''.
+
+Ethinylestradiol (ethinyl-estradiol, EE) is //not// estradiol.
+
+(link: "Yes, I am taking estradiol")[
+	(set: $estradiol to "yes")
+	(go-to: "Estradiol RoA")
+]
+
+(link: "No, I am //not// taking estradiol")[
+	(set: $estradiol to "no")
+	(go-to: "Ethinylestradiol")
+]
+
+
+:: Estradiol RoA {"position":"800,150","size":"100,100"}
+You said that you're taking ''estradiol''.
+\
+# How are you taking estradiol?
+\
+If you are taking estradiol in multiple ways, pick the //first// option that applies.
+
+I am taking estradiol...
+(link: "... swallowing pills (orally)")[
+	(set: $estradiol_oral to "yes")
+	(go-to: "Ethinylestradiol")
+]
+
+(link: "... dissolving under my tongue (sublingually)")[
+	(set: $estradiol_sublingual to "yes")
+	(go-to: "Ethinylestradiol")
+]
+
+(link: "... by injection")[
+	(set: $estradiol_injection to "yes")
+	(go-to: "Ethinylestradiol")
+]
+
+(link: "... on my skin (transdermally, using patches or gel)")[
+	(set: $estradiol_transdermal to "yes")
+	(go-to: "Ethinylestradiol")
+]
+
+
+
+:: Ethinylestradiol {"position":"700,275","size":"100,100"}
+# Are you taking ethinylestradiol?
+[(set: $ethinylestradiol to "no")]\
+Ethinylestradiol (ethinyl-estradiol) is a synthetic estrogen. Ethinylestradiol is //not// the same as estradiol.
+
+It is unusual for people on transfeminine hormone therapy to take ethinylestradiol. Ethinylestradiol carries far greater risks than estradiol.
+
+Ethinylestradiol is also known as ''EE''.
+
+It is found in many different medications intended for birth control (contraception) in cis women, including ''Microgynon'' and ''Diane-35''. 
+
+If you are taking any of these then you are taking ''ethinylestradiol''.
+
+(link: "Yes, I am taking ethinylestradiol")[
+	(set: $ethinylestradiol to "yes")
+	(go-to: "Cyproterone acetate")
+]
+
+(link: "No, I am //not// taking ethinylestradiol")[
+	(set: $ethinylestradiol to "no")
+	(go-to: "Cyproterone acetate")
+]
+
+
+:: Ethinylestradiol warnings {"position":"1275,275","size":"100,100"}
+(display: "List of Medication")\
+(if:$ethinylestradiol is "no")[\
+(go-to: "Cyproterone acetate warnings")
+ You said that you did ''not'' take ethinylestradiol
+]\
+
+(if:$ethinylestradiol is "yes")[\
+# Ethinylestradiol 
+]\
+At the doses required for transfeminine hormone therapy, ethinylestradiol (ethinyl-estradiol) is associated with significant risks.
+
+The risks associated with ethinylestradiol are far greater than those associated with estradiol.
+
+## Ethinylestradiol and blood clots
+Taking ethinylestradiol for transfeminine hormone therapy will significantly increase your risk of blood clots in your veins (deep vein thrombosis) and blood clots in your lungs (pulmonary embolism). These can be life-threatening if not treated quickly.
+
+Ethinylestradiol poses a far higher risk of blood clots than estradiol.
+
+(link: "Continue")[
+	(go-to: "Cyproterone acetate warnings")
+]
+
+
+:: Intro {"position":"425,150","size":"100,100"}
+# Are you on some form of transfeminine hormone therapy? 
+People who might take transfemine hormone therapy include 
+	* trans women, 
+	* non-binary people who were assigned-male-at-birth (AMAB), and 
+  * men who want to be or present as more feminine or more androdynous.
+\
+It might be described as "feminising hormone replacement therapy", and abbreviated as "MtF HRT" or "MtNB HRT".
+
+Transfeminine hormone therapy usually involves taking estradiol. It can also include taking other medications to suppress your body's production of androgens, like testosterone, or block their effects.
+
+(link: "Yes, I am on some form of transfeminine hormone therapy")[
+	(go-to: "Limitations")
+]
+
+(link: "No, I am //not// on any form of transfeminine hormone therapy")[
+	(go-to: "Early exit")
+]
+
+:: Limitations {"position":"550,150","size":"100,100"}
+# Limitations of this web page
+This web page is intended as basic self-help harm reduction tool. This web page is intended for people who are self-medicating with transfeminine hormone therapy ("DIY HRT").
+
+This web page will ask you whether you are taking common medications used as part of transfeminine hormone therapy. It will not ask you about //all// medications that you might be taking. 
+
+This web page will tell you about certain risks associated with the medications that you say you are taking. It will not tell you about //all// the risks associated with these medications.
+
+This web page will note some biomarkers may be relevant to those risks, and that you might want to include these biomarkers in your blood tests.
+
+The information that this web page provides should ''not ''be taken as recommending a particular course of action, but as one of a number of sources to inform your own decision-making.
+
+This web page is ''not a replacement for support by medical professionals''. Self-medication itself involves risks that are not discussed by this web page.
+
+The content of this web page was last updated in July 2023.
+
+(link: "Having read the above, I do not wish to continue using this web page")[
+	(go-to: "Early exit 2")
+]
+
+(link: "I understand the limitations of this web page and that the information it provides does not constitute recommendations")[
+	(go-to: "Estradiol")
+]
+
+:: List of Medication {"position":"875,275","size":"100,100"}
+You said that you ''are taking'' the following medications:
+(if:$estradiol_oral is "yes")[\
+	* Estradiol, orally\
+] \
+(if:$estradiol is "yes" and $estradiol_oral is not "yes")[\
+	* Estradiol (not orally)\
+] \
+(if:$ethinylestradiol is "yes")[\
+	* Ethinylestradiol\
+] \
+(if:$cyproterone_acetate is "yes")[\
+	* Cyproterone acetate\
+] \
+(if:$bicalutamide is "yes")[\
+	* Bicalutamide\
+] \
+(if:$spironolactone is "yes")[\
+	* Spironolactone\
+]
+
+:: Liver function test detail
+Liver function tests generally include at least the following biomarkers:
+	* Gamma glutamyl transferase or "GGT"
+	* Alkaline phosphatase or "ALP"
+  * Either a) Alanine aminotransferase or "ALT", or b) Aspartate aminotransferase or "AST"
+Liver function tests may also include bilirubin, albumin and some other biomarkers.
+
+
+:: Liver Function {"position":"1150,275","size":"100,100"}
+(display: "List of Medication")\
+\
+(set: $needs_liver_function to "no")\
+# Liver health
+\
+(if: $estradiol_oral is "yes")[\
+## Oral estradiol and liver health
+When estradiol is taken orally, a large proportion of the hormone is rapidly processed by the liver. 
+However this is not generally believed to result in liver damage in otherwise healthy people.
+]\
+(if:$bicalutamide is "yes")[\
+  (set: $needs_liver_function to "yes")\
+## Bicalutamide and liver health
+Bicalutamide can sometimes damage people's livers very quickly. This occurs is approximately 1 in 100 people who take bicalutamide. 
+  
+If liver damage is detected early, and the person stops taking bicalutamide and seeks help, then serious complications are generally avoided.
+]\
+\
+(if:$cyproterone_acetate is "yes")[\
+  (set: $needs_liver_function to "yes")\
+## Cyproterone acetate and liver health
+Cyproterone acetate has the potential to cause damage to your liver over time. 
+
+Doses of around 12.5mg-per-day or lower of cyproterone acetate are very unlikely to cause liver damage in otherwise healthy people, but there is still a risk.  
+
+If liver damage is detected early, and the person stops taking cyproterone acetate and seeks helps, then serious complications are generally avoided.
+]\
+\
+(if: $needs_liver_function is "yes")[\
+## Liver function tests
+  Based only on the above, you may wish to ensure that your blood tests include a **liver function test** (LFT). 
+
+ (link: "Tell me more about what biomarkers are included in liver function tests.")[(display: "Liver function test detail")]\
+]\
+\
+(if: $needs_liver_function is "no")[\
+  ## Other aspects of liver health
+  Based only on the above, your transfeminine hormone therapy doesn't imply an obvious risk to the health of your liver. Other medications that you take or health conditions that you have might mean there is a risk that hasn't been described above.
+
+  Common causes of liver disease include being very overweight, an undiagnosed hepatitis infection, and regularly drinking too much alcohol.
+]\
+
+(link: "Continue")[
+	(go-to: "Ethinylestradiol warnings")
+]
+
+
+:: Spironolactone {"position":"700,650","size":"100,100"}
+# Are you taking  spironolactone?
+{
+[(set: $spironolactone to "no")]\
+}
+Spironolactone is generally described as an "anti-androgen". People take it as part of transfeminine hormone therapy to help suppress their body's production of testosterone.
+
+Spironolactone is also known as: 
+	* "''spiro''"
+	* "''Aldactone''"
+	* "''Spiractin''"
+	* "''Hyles''"
+	* "''Verospiron''"
+If you are taking any of these then you are taking ''spironolactone''.
+
+(link: "Yes, I am taking spironolactone")[
+	(set: $spironolactone to "yes")
+	(go-to: "Check answers")
+]
+
+(link: "No, I am //not// taking spironolactone")[
+	(set: $spironolactone to "no")
+	(go-to: "Check answers")
+]
+
+
+:: Spironolactone warnings {"position":"1550,275","size":"100,100"}
+(display: "List of Medication")\
+ (set: $needs_urea_and_potassium to "no")\
+\
+(if: $spironolactone is "no")[\
+(goto: "Summary")
+ You said that you did ''not'' take spironolactone.
+]\
+
+(if:$spironolactone is "yes")[\
+# Spironolactone and potassium levels
+  (set: $needs_urea_and_potassium to "yes")\
+Spironolactone can sometimes produce abnormally high levels of potassium in the blood (hyperkalemia), and other changes to salt and mineral levels (electrolytes).
+
+Very high levels of potassium in the blood can cause serious health problems, including heart problems, if left untreated.
+
+It is rare for spironolactone to result in dangerously high level of potassium in the blood, in otherwise healthy people. Diet, other medication and existing health conditions can increase this risk.
+]\
+
+(if:$needs_urea_and_potassium is "yes")[\
+Based only the above, you may wish to ensure that your blood tests include ''urea and potassium levels''.
+]\
+
+(link: "Continue")[
+	(go-to: "Summary")
+]
+
+
+
+:: Summary {"position":"1675,275","size":"100,100"}
+# Summary
+## What you said
+(display: "List of Medication")\
+\
+## Blood tests
+Based only on the above, you may want to ensure your blood tests include at least the following:
+	* Estradiol / Oestradiol / E / E2
+  * Testosterone / T
+(if:$needs_liver_function is "yes")[\
+	* Liver function test / Liver panel\
+] \
+(if:$needs_prolactin is "yes")[\
+	* Prolactin\
+] \
+(if:$needs_urea_and_potassium is "yes")[\
+	* Urea and potassium levels\
+] \
+You may also want your blood tests to sometimes include the following:
+	* Full blood count / FBC
+(if:$needs_b12 is "yes")[\
+	* Active Vitamin B12\
+] \
+(if:$needs_prolactin is not "yes")[\
+	* Prolactin\
+] \
+(if:$needs_liver_function is not "yes")[\
+	* Liver function test / Liver panel\
+] \
+(link: "Tell me more about what biomarkers are included in liver function tests.")[(display: "Liver function test detail")]
+
+## Fingerprick or venous sampling
+Fingerprick tests are ''not'' sensitive enough for the measurement of estradiol and testosterone levels in the context of transfeminine hormone therapy. 
+
+You will need blood samples to be taken from a vein (venous blood draw, phlebotomy) for accurate measurement of these hormone levels.
+
+## Other medication or health conditions
+Other medications that you are taking or health conditions you have may mean that it is important to routinely check other biomarkers.
+
+(link: "Ask me again")[
+	(go-to: "Estradiol")
+]
+
+
+:: StoryStylesheet [stylesheet]
+body{
+  font-size: 16px;
+}
+
+body::after{
+	content: "PROTOTYPE - PROOF OF CONCEPT - DO NOT USE";
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	padding: 0.5em 0em;
+	text-align: center;
+	color: red;
+	background-color: black;
+	font-family: sans-serif;
+	font-weight: bold;
+}
+
+tw-story{
+  background-color: rgb(245, 240, 244);
+  color: rgb(33, 43, 50);
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.1875rem
+}
+
+
+tw-story h1{
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+tw-story h2{
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
