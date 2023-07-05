@@ -403,7 +403,10 @@ If liver damage is detected early, and the person stops taking cyproterone aceta
 :: Spironolactone {"position":"700,650","size":"100,100"}
 # Are you taking  spironolactone?
 {
-[(set: $spironolactone to "no")]\
+[(set: $spironolactone to "no")\
+ (set: $needs_potassium to "no")\
+ (set: $needs_kidney_function_test to "no")\
+]\
 }
 Spironolactone is generally described as an "anti-androgen". People take it as part of transfeminine hormone therapy to help suppress their body's production of testosterone.
 
@@ -428,7 +431,8 @@ If you are taking any of these then you are taking ''spironolactone''.
 
 :: Spironolactone warnings {"position":"1550,275","size":"100,100"}
 (display: "List of Medication")\
- (set: $needs_urea_and_potassium to "no")\
+ (set: $needs_potassium to "no")\
+ (set: $needs_kidney_function_test to "no")\
 \
 (if: $spironolactone is "no")[\
 (goto: "Summary")
@@ -437,7 +441,8 @@ If you are taking any of these then you are taking ''spironolactone''.
 
 (if:$spironolactone is "yes")[\
 # Spironolactone and potassium levels
-  (set: $needs_urea_and_potassium to "yes")\
+  (set: $needs_potassium to "yes")\
+  (set: $needs_kidney_function_test to "yes")\
 Spironolactone can sometimes produce abnormally high levels of potassium in the blood (hyperkalemia), and other changes to salt and mineral levels (electrolytes).
 
 Very high levels of potassium in the blood can cause serious health problems, including heart problems, if left untreated.
@@ -445,14 +450,27 @@ Very high levels of potassium in the blood can cause serious health problems, in
 It is rare for spironolactone to result in dangerously high level of potassium in the blood, in otherwise healthy people. Diet, other medication and existing health conditions can increase this risk.
 ]\
 
-(if:$needs_urea_and_potassium is "yes")[\
-Based only the above, you may wish to ensure that your blood tests include ''urea and potassium levels''.
+(if:$needs_potassium is "yes")[\
+Based only the above, you may wish to ensure that your blood tests include ''potassium levels''.
+]\
+
+Abnormally high levels of potassium can also be related to worsening kidney health.
+
+(if:$needs_kidney_function_test is "yes")[\
+Based only the above, you may wish to ensure that your blood tests include a ''kidney function test''.
+
+(link: "Tell me more about what biomarkers are included in kidney function tests.")[(display: "Kidney function test detail")]
 ]\
 
 (link: "Continue")[
 	(go-to: "Summary")
 ]
 
+:: Kidney function test detail
+Kidney function tests generally include at least the following biomarkers:
+	* Creatinine
+  * Either a) Urea or b) Blood urea nitrogen (BUN)
+Kidney function tests often include other biomarkers.
 
 
 :: Summary {"position":"1675,275","size":"100,100"}
@@ -470,8 +488,11 @@ Based only on the above, you may want to ensure your blood tests include at leas
 (if:$needs_prolactin is "yes")[\
 	* Prolactin\
 ] \
-(if:$needs_urea_and_potassium is "yes")[\
-	* Urea and potassium levels\
+(if:$needs_potassium is "yes")[\
+	* Potassium levels\
+] \
+(if:$needs_kidney_function_test is "yes")[\
+	* Kidney function test / Renal panel\
 ] \
 You may also want your blood tests to sometimes include the following:
 	* Full blood count / FBC
@@ -485,6 +506,10 @@ You may also want your blood tests to sometimes include the following:
 	* Liver function test / Liver panel\
 ] \
 (link: "Tell me more about what biomarkers are included in liver function tests.")[(display: "Liver function test detail")]
+
+(if:$needs_kidney_function_test is "yes")[\
+(link: "Tell me more about what biomarkers are included in kidney function tests.")[(display: "Kidney function test detail")]
+]\
 
 ## Fingerprick or venous sampling
 Fingerprick tests are ''not'' sensitive enough for the measurement of estradiol and testosterone levels in the context of transfeminine hormone therapy. 
