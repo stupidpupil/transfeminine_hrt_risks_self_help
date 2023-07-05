@@ -375,7 +375,10 @@ If liver damage is detected early, and the person stops taking cyproterone aceta
 	(go-to: &quot;Ethinylestradiol warnings&quot;)
 ]</tw-passagedata><tw-passagedata pid="16" name="Spironolactone" tags="" position="700,650" size="100,100"># Are you taking  spironolactone?
 {
-[(set: $spironolactone to &quot;no&quot;)]\
+[(set: $spironolactone to &quot;no&quot;)\
+ (set: $needs_potassium to &quot;no&quot;)\
+ (set: $needs_kidney_function_test to &quot;no&quot;)\
+]\
 }
 Spironolactone is generally described as an &quot;anti-androgen&quot;. People take it as part of transfeminine hormone therapy to help suppress their body&#39;s production of testosterone.
 
@@ -396,7 +399,8 @@ If you are taking any of these then you are taking &#39;&#39;spironolactone&#39;
 	(set: $spironolactone to &quot;no&quot;)
 	(go-to: &quot;Check answers&quot;)
 ]</tw-passagedata><tw-passagedata pid="17" name="Spironolactone warnings" tags="" position="1550,275" size="100,100">(display: &quot;List of Medication&quot;)\
- (set: $needs_urea_and_potassium to &quot;no&quot;)\
+ (set: $needs_potassium to &quot;no&quot;)\
+ (set: $needs_kidney_function_test to &quot;no&quot;)\
 \
 (if: $spironolactone is &quot;no&quot;)[\
 (goto: &quot;Summary&quot;)
@@ -405,7 +409,8 @@ If you are taking any of these then you are taking &#39;&#39;spironolactone&#39;
 
 (if:$spironolactone is &quot;yes&quot;)[\
 # Spironolactone and potassium levels
-  (set: $needs_urea_and_potassium to &quot;yes&quot;)\
+  (set: $needs_potassium to &quot;yes&quot;)\
+  (set: $needs_kidney_function_test to &quot;yes&quot;)\
 Spironolactone can sometimes produce abnormally high levels of potassium in the blood (hyperkalemia), and other changes to salt and mineral levels (electrolytes).
 
 Very high levels of potassium in the blood can cause serious health problems, including heart problems, if left untreated.
@@ -413,13 +418,24 @@ Very high levels of potassium in the blood can cause serious health problems, in
 It is rare for spironolactone to result in dangerously high level of potassium in the blood, in otherwise healthy people. Diet, other medication and existing health conditions can increase this risk.
 ]\
 
-(if:$needs_urea_and_potassium is &quot;yes&quot;)[\
-Based only the above, you may wish to ensure that your blood tests include &#39;&#39;urea and potassium levels&#39;&#39;.
+(if:$needs_potassium is &quot;yes&quot;)[\
+Based only the above, you may wish to ensure that your blood tests include &#39;&#39;potassium levels&#39;&#39;.
+]\
+
+Abnormally high levels of potassium can also be related to worsening kidney health.
+
+(if:$needs_kidney_function_test is &quot;yes&quot;)[\
+Based only the above, you may wish to ensure that your blood tests include a &#39;&#39;kidney function test&#39;&#39;.
+
+(link: &quot;Tell me more about what biomarkers are included in kidney function tests.&quot;)[(display: &quot;Kidney function test detail&quot;)]
 ]\
 
 (link: &quot;Continue&quot;)[
 	(go-to: &quot;Summary&quot;)
-]</tw-passagedata><tw-passagedata pid="18" name="Summary" tags="" position="1675,275" size="100,100"># Summary
+]</tw-passagedata><tw-passagedata pid="18" name="Kidney function test detail" tags="" position="975,225" size="100,100">Kidney function tests generally include at least the following biomarkers:
+	* Creatinine
+  * Either a) Urea or b) Blood urea nitrogen (BUN)
+Kidney function tests often include other biomarkers.</tw-passagedata><tw-passagedata pid="19" name="Summary" tags="" position="1675,275" size="100,100"># Summary
 ## What you said
 (display: &quot;List of Medication&quot;)\
 \
@@ -433,8 +449,11 @@ Based only on the above, you may want to ensure your blood tests include at leas
 (if:$needs_prolactin is &quot;yes&quot;)[\
 	* Prolactin\
 ] \
-(if:$needs_urea_and_potassium is &quot;yes&quot;)[\
-	* Urea and potassium levels\
+(if:$needs_potassium is &quot;yes&quot;)[\
+	* Potassium levels\
+] \
+(if:$needs_kidney_function_test is &quot;yes&quot;)[\
+	* Kidney function test / Renal panel\
 ] \
 You may also want your blood tests to sometimes include the following:
 	* Full blood count / FBC
@@ -448,6 +467,10 @@ You may also want your blood tests to sometimes include the following:
 	* Liver function test / Liver panel\
 ] \
 (link: &quot;Tell me more about what biomarkers are included in liver function tests.&quot;)[(display: &quot;Liver function test detail&quot;)]
+
+(if:$needs_kidney_function_test is &quot;yes&quot;)[\
+(link: &quot;Tell me more about what biomarkers are included in kidney function tests.&quot;)[(display: &quot;Kidney function test detail&quot;)]
+]\
 
 ## Fingerprick or venous sampling
 Fingerprick tests are &#39;&#39;not&#39;&#39; sensitive enough for the measurement of estradiol and testosterone levels in the context of transfeminine hormone therapy. 
