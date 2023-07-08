@@ -496,7 +496,7 @@ Based only on the above, you may want to ensure your blood tests include at leas
 	* Kidney function test / Renal panel\
 ] \
 You may also want your blood tests to sometimes include the following:
-	* Full blood count / FBC
+	* Full blood count / FBC or Complete blood count / CBC
 (if:$needs_b12 is "yes")[\
 	* Active Vitamin B12\
 ] \
